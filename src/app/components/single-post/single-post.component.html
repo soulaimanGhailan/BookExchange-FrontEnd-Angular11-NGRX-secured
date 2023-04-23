@@ -1,0 +1,41 @@
+<div class="content-outer">
+
+  <div id="page-content" class="row">
+
+    <div id="primary" class="eight columns">
+      <ng-container *ngIf="post$ | async as post">
+      <article class="post">
+              <ng-container *ngIf="post.book">
+                <app-post-blog [book]="post.book"></app-post-blog>
+              </ng-container>
+
+            <app-post-info></app-post-info>
+           <ng-container *ngIf="post.book">
+             <app-owner-info [owner]="post.book.owner"></app-owner-info>
+           </ng-container>
+
+          <ul class="post-nav cf">
+            <li class="prev"><a rel="prev" href="#"><strong>Previous Article</strong> Duis Sed Odio Sit Amet Nibh Vulputate</a></li>
+            <li class="next"><a rel="next" href="#"><strong>Next Article</strong> Morbi Elit Consequat Ipsum</a></li>
+          </ul>
+      </article> <!-- post end -->
+
+        <ng-container *ngIf="post.book">
+            <app-comments [bookId]="post.book.bookId"></app-comments>
+        </ng-container>
+
+      </ng-container>
+
+    </div>
+
+    <div id="secondary" class="four columns end">
+
+      <aside id="sidebar">
+            <app-search-blog></app-search-blog>
+      </aside> <!-- Sidebar End -->
+
+    </div> <!-- Comments End -->
+
+  </div>
+
+</div> <!-- Content End-->

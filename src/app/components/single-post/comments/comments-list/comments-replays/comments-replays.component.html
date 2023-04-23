@@ -1,0 +1,23 @@
+<ng-container *ngIf="commentReply">
+  <li class="depth-3">
+
+    <div class="avatar" style="margin-left: 160px;">
+      <img (click)="goToOwnerProfile()" width="50" height="50" class="avatar" src="{{userImageSrc}}" alt="">
+    </div>
+
+    <div class="comment-info">
+      <a (click)="goToOwnerProfile()" style="cursor: pointer" class="lining">  {{commentReply.owner.firstname}} {{commentReply.owner.lastname}}</a>
+      <div class="comment-meta">
+        <time class="comment-time" datetime="2014-01-14T25:15">{{getDate()}} @ {{getHour()}}</time>
+      </div>
+    </div>
+
+    <div class="comment-text">
+      <p>{{commentReply.commentContent}}</p>
+    </div>
+  </li>
+
+  <br> <br> <br>
+</ng-container>
+
+

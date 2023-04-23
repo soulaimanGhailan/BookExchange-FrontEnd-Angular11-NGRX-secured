@@ -1,0 +1,65 @@
+<!-- Content
+================================================== -->
+<div class="content-outer">
+
+  <div id="page-content" class="row">
+    <div id="primary" class="eight columns">
+      <div #topOfPage></div>
+
+      <ng-container *ngIf="BookPageList$ | async as state" [ngSwitch]="state.dataState">
+         <ng-container *ngSwitchCase="BooksStateEnum.LOADING">
+           <div class="entry-header cf">
+             <h1>Books Loading..................</h1>
+           </div>
+         </ng-container>
+        <ng-container *ngSwitchCase="BooksStateEnum.ERROR">
+          <div class="entry-header cf">
+            <h1 class="text-danger">{{state.errorMessage}}</h1>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="BooksStateEnum.INITIAL">
+          <div class="entry-header cf">
+            <h1 class="text-danger"> initial state </h1>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="BooksStateEnum.LOADED">
+         <ng-container *ngIf="state.books.length != 0">
+           <article class="post">
+             <app-post-blog *ngFor="let book of state.books" [book]="book">  </app-post-blog>
+           </article> <!-- post end -->
+
+
+           <!-- Pagination -->
+            <ng-container [ngSwitch]="state.fetchStatus">
+              <ng-container *ngSwitchCase="FetchState.All">
+                <app-pagination (eventEmitter)="onPagination($event)" [fetchStatus]="FetchState.All" [size]="2" [currentPage]="currentPage" [totalPages]="state.pageInfo.totalPages" ></app-pagination>
+              </ng-container>
+              <ng-container *ngSwitchCase="FetchState.SearchByCategory">
+                <app-pagination (eventEmitter)="onPagination($event)" [fetchStatus]="FetchState.SearchByCategory" [payload]="state.books[0].bookCategory" [size]="2" [currentPage]="currentPage" [totalPages]="state.pageInfo.totalPages"></app-pagination>
+              </ng-container>
+              <ng-container *ngSwitchCase="FetchState.SearchByKeyWord">
+                <app-pagination (eventEmitter)="onPagination($event)"  [fetchStatus]="FetchState.SearchByKeyWord" [payload]="state.books[0].bookTitle" [size]="2" [currentPage]="currentPage" [totalPages]="state.pageInfo.totalPages"></app-pagination>
+              </ng-container>
+            </ng-container>
+         </ng-container>
+        </ng-container>
+      </ng-container>
+
+
+    </div> <!-- Primary End-->
+
+    <div id="secondary" class="four columns end">
+
+      <aside id="sidebar">
+
+        <app-search-blog (eventEmitter)="Scroll()"></app-search-blog>
+
+      </aside>
+
+    </div> <!-- Secondary End-->
+
+  </div>
+
+</div> <!-- Content End-->
+
+

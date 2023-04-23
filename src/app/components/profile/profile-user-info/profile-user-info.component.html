@@ -1,0 +1,42 @@
+<div id="secondary"  class="four columns entry-details">
+  <div id="team-wrapper">
+    <div class="column member">
+
+      <img src="{{userImageUrl}}" alt=""/>
+
+      <div class="member-name">
+        <h4 style="font-weight: bold">{{user.firstname}}  {{user.lastname}}</h4>
+        <span>books owner</span>
+      </div>
+
+      <br>
+      <ul class="member-social">
+        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+        <li><a href="#"><i class="fa fa-skype"></i></a></li>
+      </ul>
+
+    </div> </div>
+  <aside id="sidebar">
+    <div class="widget widget_contact">
+      <h5>Address and Phone</h5>
+      <p class="address">
+        <ng-container *ngIf="userAddress">
+          <a class="lining">Country: </a>{{userAddress.country}}<br> <br>
+          <a class="lining">City: </a>{{userAddress.city}}<br> <br>
+          <a class="lining">HomeAddress: </a>{{userAddress.homeAddress}}<br> <br>
+        </ng-container>
+        <a class="lining">Phone number: </a><span>{{user.phoneNumber}}</span>
+      </p>
+      <br>
+      <h5>Email and Social</h5>
+      <p>
+        <a class="lining">E-mail: </a> {{user.email}}<br> <br>
+        <a class="lining">Twitter:: </a> <a href="#">@</a><br> <br>
+        <a class="lining">Facebook:</a> <a href="#"> FB Page</a><br> <br>
+      </p>
+    </div>
+  </aside>
+</div> <!-- Secondary End-->

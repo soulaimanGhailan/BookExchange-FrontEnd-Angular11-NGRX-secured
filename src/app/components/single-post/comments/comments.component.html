@@ -1,0 +1,49 @@
+<!-- Comments
+     ================================================== -->
+<div id="comments">
+
+  <ng-container *ngIf="Comments$ | async as state" [ngSwitch]="state.dataState">
+    <ng-container *ngSwitchCase="CommentStateEnum.LOADING">
+      <div class="entry-header cf">
+        <h1>Comment Loading..................</h1>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="CommentStateEnum.ERROR">
+      <div class="entry-header cf">
+        <h1 class="text-danger">{{state.errorMessage}}</h1>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="CommentStateEnum.INITIAL">
+      <div class="entry-header cf">
+        <h1 class="text-danger"> initial state </h1>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="CommentStateEnum.LOADED">
+
+      <h3>{{state.pageInfo.totalElements}} Comments</h3>
+
+      <!-- commentlist -->
+      <ol class="commentlist">
+        <app-comments-list *ngFor="let comment of state.comments" [comment]="comment"></app-comments-list>
+        <ng-container *ngIf="state.comments">
+          <nav class="col full pagination">
+              <ng-container *ngIf="state.pageInfo.totalElements > state.comments.length">
+                <button style="height: 50px"  class="button" (click)="moreComment(5)">more comments</button>
+              </ng-container>
+              <ng-container *ngIf="state.comments.length > 5">
+                <button style="margin-left: 20px ; height: 50px" class="button" (click)="lessComment()">less comments</button>
+              </ng-container>
+          </nav>
+        </ng-container>
+      </ol> <!-- Commentlist End -->
+
+
+    </ng-container>
+  </ng-container>
+
+
+
+
+  <app-comment-form></app-comment-form>
+
+</div>  <!-- Comments End -->

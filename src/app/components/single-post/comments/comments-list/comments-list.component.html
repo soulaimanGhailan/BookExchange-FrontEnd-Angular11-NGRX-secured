@@ -1,0 +1,62 @@
+<!--test class if replays >> thread-alt depth-1 else depth-1-->
+
+<li class=" depth-1">
+
+  <div  class="avatar" style="margin-left: 120px">
+    <a (click)="goToOwnerProfile()" style="cursor: pointer;"><img width="50" height="50" class="avatar"  src="{{userImageSrc}}"></a>
+  </div>
+
+  <div class="comment-info">
+    <a (click)="goToOwnerProfile()" style="cursor: pointer" class="lining">  {{comment.owner.firstname}} {{comment.owner.lastname}}</a>
+
+    <div class="comment-meta">
+      <time class="comment-time" datetime="2014-01-14T24:05">{{getDate()}} @ {{getHour()}}</time>
+      <span class="sep">/</span><a (click)="createReply()" class="reply" style="cursor: pointer ; font-weight: bold">Reply</a>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <p>{{comment.commentContent}}</p>
+  </div>
+  <br>
+  <ul class="children">
+    <ul class="children">
+
+     <ng-container *ngIf="comment.repliesPageInfo.totalElements != 0">
+       <ng-container *ngIf="comment.replies">
+         <app-comments-replays  *ngFor="let reply of comment.replies" [commentReply]="reply"></app-comments-replays>
+       </ng-container>
+       <ng-container *ngIf="!comment.replies">
+         <app-comments-replays [commentId]="comment.commentId" [initReply]="true"></app-comments-replays>
+       </ng-container>
+<!--       -->
+      <ng-container *ngIf="comment.replies">
+        <nav class="col full pagination">
+          <ng-container *ngIf="comment.replies.length < comment.repliesPageInfo.totalElements">
+            <button style="margin-left: 200px" class="page-numbers next " (click)="moreReplies(3)">more replies</button>
+          </ng-container>
+          <ng-container *ngIf="comment.replies.length != 0">
+            <button style="margin-left: 20px" class="page-numbers next " (click)="lessReplies()">less replies</button>
+          </ng-container>
+        </nav>
+      </ng-container>
+
+     </ng-container>
+    </ul>
+  </ul>
+  <ng-container>
+
+   <form *ngIf="replyForm" [formGroup]="replyForm">
+     <div class="cf">
+       <label for="reply">  <span class="required">*</span></label>
+       <input formControlName = "replyContent"  type="text" id="reply" size="35" value="" />
+       <nav class="col full pagination">
+       <button style="margin-left: 20px ;margin-top: 3px">REPLY</button>
+       </nav>
+     </div>
+   </form>
+
+  </ng-container>
+
+</li>
+

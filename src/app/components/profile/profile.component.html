@@ -1,0 +1,70 @@
+<div class="content-outer">
+
+  <div id="page-content" class="row portfolio">
+
+    <section class="entry cf">
+    <div #topOfPage></div>
+<!--      profile -->
+      <ng-container *ngIf="profileState$ | async as profileState" [ngSwitch]="profileState.dataState">
+        <ng-container *ngSwitchCase="profileStateEnum.LOADING">
+          <div class="entry-header cf">
+            <h1>Books Loading..................</h1>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="profileStateEnum.ERROR">
+          <div class="entry-header cf">
+            <h1 class="text-danger">{{profileState.errorMessage}}</h1>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="profileStateEnum.INITIAL">
+          <div class="entry-header cf">
+            <h1 class="text-danger"> initial state </h1>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="profileStateEnum.LOADED">
+          <app-profile-user-info [user]="profileState.profiles[0]"></app-profile-user-info>
+        </ng-container>
+      </ng-container>
+
+      <div>
+        <h1 style="font-weight: bold ; margin-left: 150px">Book List Of this Profile</h1> <br> <br> <br>
+        <div id="primary" class="eight columns portfolio-list">
+
+            <ng-container *ngIf="bookState$ | async as bookList" [ngSwitch]="bookList.dataState">
+              <ng-container *ngSwitchCase="BookStateEnum.LOADING">
+                <div class="entry-header cf">
+                  <h1>Books Loading..................</h1>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="BookStateEnum.ERROR">
+                <div class="entry-header cf">
+                  <h1 class="text-danger">{{bookList.errorMessage}}</h1>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="BookStateEnum.INITIAL">
+                <div class="entry-header cf">
+                  <h1 class="text-danger"> initial state </h1>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="BookStateEnum.LOADED">
+              <div id="portfolio-wrapper" class="bgrid-halves cf">
+                <div [ngClass]="bookList.books.indexOf(book)%2 ==0 ? 'columns portfolio-item first' : 'columns portfolio-item'"  *ngFor="let book of bookList.books">
+                  <app-profile-books-list [book]="book"></app-profile-books-list>
+                </div>
+              </div>
+            <!-- pagination-->
+                <app-pagination (eventEmitter)="onPagination($event)" [currentPage]="currentPage"
+                [totalPages]="bookList.pageInfo.totalPages" [fetchStatus]="bookList.fetchStatus"
+                                [size]="6" [payload]="bookList.books[0].owner.userId"></app-pagination>
+              </ng-container>
+
+            </ng-container>
+
+
+        </div> <!-- primary end-->
+      </div>
+
+    </section> <!-- end section -->
+  </div> <!-- #page-content end-->
+
+</div> <!-- content End-->

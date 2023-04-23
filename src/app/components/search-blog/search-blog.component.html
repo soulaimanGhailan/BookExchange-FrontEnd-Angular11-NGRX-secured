@@ -1,0 +1,31 @@
+<div #topOfPage></div>
+<div class="widget widget_search">
+  <h5>Search</h5>
+  <form *ngIf="searchFrom" [formGroup]="searchFrom" (ngSubmit)="onSearch()">
+    <input class="text-search" type="text" onfocus="if (this.value == 'Search here...')
+     { this.value = ''; }" onblur="if(this.value == '')
+     { this.value = 'Search here...'; }" value="Search here..."
+    formControlName="keyword">
+    <input type="submit" class="submit-search" value="">
+  </form>
+
+
+<div class="widget widget_categories">
+  <h5 class="widget-title">Categories</h5>
+  <ul   class="link-list cf">
+    <li *ngFor="let cat of categories"><a (click)="onSearchByCategory(cat)" style="cursor: pointer;" >{{cat}}</a></li>
+  </ul>
+
+</div>
+
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="#">drupal</a>
+    <a href="#">joomla</a>
+    <a href="#">ghost</a>
+    <a href="#">wordpress</a>
+  </div>
+</div>
+
+

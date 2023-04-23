@@ -1,0 +1,43 @@
+<header>
+
+  <div class="row">
+
+    <div class="twelve columns">
+
+      <div class="logo">
+        <a href="index.html"><img alt="" src="images/logo.png"></a>
+      </div>
+
+      <nav id="nav-wrap">
+
+        <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+        <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+        <ul id="nav" class="nav">
+
+          <li><a (click)="onHome()">Home</a></li>
+          <li><span><a style="cursor: pointer;" (click)="onBlog()">Blog</a></span>
+            <ul>
+              <li><a style="cursor: pointer;">Blog Index</a></li>
+              <li><a (click)="onSinglePost()" style="cursor: pointer;">Post</a></li>
+            </ul>
+          </li>
+          <li><span><a style="cursor: pointer;" (click)="onProfile()">Portfolio</a></span>
+            <ul>
+              <li><a style="cursor: pointer;">Portfolio Index</a></li>
+              <li><a style="cursor: pointer;">Portfolio Entry</a></li>
+            </ul>
+          </li>
+          <li><a style="cursor: pointer;">About</a></li>
+          <li><a style="cursor: pointer;">Contact</a></li>
+          <li><a style ="cursor: pointer;">Features</a></li>
+
+        </ul> <!-- end #nav -->
+
+      </nav> <!-- end #nav-wrap -->
+
+    </div>
+
+  </div>
+
+</header> <!-- Header End -->

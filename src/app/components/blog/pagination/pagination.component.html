@@ -1,0 +1,17 @@
+<nav class="col full pagination">
+  <ul>
+    <li><button (click)="prevPage( fetchStatus , payload)"
+                class="page-numbers next">Prev</button>
+    </li>
+    <li *ngFor="let item of [].constructor(totalPages) ; let i  = index">
+      <span *ngIf="currentPage == i"  class="page-numbers current">{{i}}</span>
+      <button (click)="handlePage(i , fetchStatus , payload )"
+              *ngIf="currentPage != i "  class="page-numbers">{{i}}</button>
+    </li>
+    <li>
+      <button (click)="nextPage(totalPages,  fetchStatus , payload )"
+              class="page-numbers next">Next</button>
+    </li>
+  </ul>
+
+</nav>

@@ -1,0 +1,37 @@
+
+
+ <ng-container *ngIf="book">
+   <div class="entry-header cf">
+     <h1><a style="cursor: pointer;" (click)="goToPost()" title="">{{book.bookTitle}}</a></h1>
+   </div>
+<!--   book owner info-->
+     <ol class="commentlist">
+   <li class="depth-1">
+
+     <div class="avatar">
+       <a (click)="goToOwner()" style="cursor: pointer;"><img width="50" height="50" class="avatar"  src="{{userImageSrc}}"></a>
+     </div>
+     <div class="comment-info">
+       <div *ngIf="book.owner"> <a (click)="goToOwner()" class="lining" style="cursor: pointer;">{{book.owner.firstname + " " + book.owner.lastname }}</a></div>
+       <div class="comment-meta">
+         <time class="comment-time" datetime="2014-01-14T23:05">{{getDate()}} @ {{getHour()}}</time>
+       </div>
+     </div>
+
+   </li>
+ </ol>
+   <div class="post-thumb">
+     <div>
+       <a  style="cursor: pointer;" (click)="goToPost()" title=""><img   width="200" height="500" alt="book-image" src="{{bookImageSrc}}" title="book-image"></a>
+     </div>
+   </div>
+
+   <div class="post-content">
+     <div>
+       <dt><b style="font-weight: bold">post description </b></dt>
+       <p class="lead"> {{book.description}} </p>
+     </div>
+   </div>
+ </ng-container>
+
+
