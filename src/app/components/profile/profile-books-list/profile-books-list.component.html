@@ -1,6 +1,6 @@
 
   <div class="item-wrap">
-    <a href="portfolio.html">
+    <a  style="cursor: pointer"  (click)="goToBook()">
       <div class="container" [ngStyle]="{'background-image': 'url(' + bookImageUrl + ')'}">
 
       </div>
@@ -9,7 +9,7 @@
       <div class="link-icon"><i class="fa fa-link"></i></div>
     </a>
     <div class="portfolio-item-meta">
-      <h5><a href="portfolio.html">{{book.bookTitle}}</a></h5>
+      <h5><a>{{book.bookTitle}}</a></h5>
       <p>Illustrration</p>
     </div>
   </div>

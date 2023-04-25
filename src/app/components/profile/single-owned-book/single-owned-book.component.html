@@ -1,0 +1,57 @@
+<div class="content-outer">
+
+  <div id="page-content" class="row portfolio">
+
+    <section class="entry cf">
+
+      <ng-container *ngIf="ownerBook$ | async as bookState">
+        <ng-container *ngIf="bookState.book">
+          <div id="secondary"  class="four columns entry-details">
+
+            <h1>Description.</h1>
+
+            <div class="entry-description">
+
+              <p>{{bookState.book.description}}</p>
+
+            </div>
+
+            <ul class="portfolio-meta-list">
+              <li><span>Date: </span>{{getDate()}}</li>
+              <li><span>Hout </span>{{getHour()}}</li>
+              <li><span>Skills: </span>Photoshop, Photography, Branding</li>
+            </ul>
+
+            <a class="button" href="http://behance.net">View project</a>
+
+          </div> <!-- secondary End-->
+
+          <div id="primary" class="eight columns">
+
+            <div class="entry-media">
+
+              <img src="{{bookImgUrl}}" alt="" />
+
+            </div>
+
+            <div class="entry-excerpt">
+
+              <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,
+                nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate
+                cursus a sit amet mauris. Morbi accumsan ipsum velit. </p>
+
+            </div>
+
+          </div> <!-- primary end-->
+        </ng-container>
+      </ng-container>
+    </section> <!-- end section -->
+
+    <ul class="post-nav cf">
+      <li class="prev"><a href="#" rel="prev"><strong>Previous Entry</strong> Duis Sed Odio Sit Amet Nibh Vulputate</a></li>
+      <li class="next"><a href="#" rel="next"><strong>Next Entry</strong> Morbi Elit Consequat Ipsum</a></li>
+    </ul>
+
+  </div>
+
+</div> <!-- content End-->

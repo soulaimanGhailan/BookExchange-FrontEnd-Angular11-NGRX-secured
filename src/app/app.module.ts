@@ -35,6 +35,7 @@ import {UsersProfilesEffect} from "./ngrx/UsersProfileState/UsersProfile.effect"
 import {userProfileReducer} from "./ngrx/UsersProfileState/UsersProfile.reducers";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { PaginationComponent } from './components/blog/pagination/pagination.component';
+import { SingleOwnedBookComponent } from './components/profile/single-owned-book/single-owned-book.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { PaginationComponent } from './components/blog/pagination/pagination.com
     ProfileBooksListComponent,
     ProfileUserInfoComponent,
     PaginationComponent,
+    SingleOwnedBookComponent,
 
   ],
     imports: [
