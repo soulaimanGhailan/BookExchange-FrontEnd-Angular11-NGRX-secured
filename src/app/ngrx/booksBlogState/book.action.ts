@@ -78,7 +78,7 @@ export class SearchBookCategoryActionError implements Action{
   }
 }
 
-//search  Book by Category action
+//search  Book of user action
 export class GetBooksOfUserAction implements Action{
   type: BookActionType = BookActionType.GET_BOOk_OfUSER;
   // paylaod : {keyword , pageSize}

@@ -42,8 +42,6 @@ export class PaginationComponent implements OnInit{
 
       default : this.store.dispatch(new GetBooksPageAction({page : i , size : this.size})); break;
     }
-
-
   }
 
   prevPage(fetchStatus: FetchState, payload : string ) {

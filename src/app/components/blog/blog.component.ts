@@ -2,8 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {map, Observable} from "rxjs";
 import {BooksStateEnum, BookState, FetchState} from "../../ngrx/booksBlogState/book.reducer";
 import {Store} from "@ngrx/store";
-import {GetBooksPageAction, SearchBookCategoryAction, SearchBookKeywordAction} from "../../ngrx/booksBlogState/book.action";
-import {Router} from "@angular/router";
+import {GetBooksPageAction} from "../../ngrx/booksBlogState/book.action";
 
 @Component({
   selector: 'app-blog',
@@ -35,7 +34,11 @@ export class BlogComponent implements OnInit{
   }
 
   Scroll() {
-    this.currentPage  = 0;
     this.topOfPage.nativeElement.scrollIntoView();
+  }
+
+  onPaginationSearch($event: any) {
+    this.currentPage = 0;
+    this.Scroll();
   }
 }

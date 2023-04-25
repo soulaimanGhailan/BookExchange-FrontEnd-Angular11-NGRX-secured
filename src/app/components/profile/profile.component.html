@@ -53,9 +53,11 @@
                 </div>
               </div>
             <!-- pagination-->
-                <app-pagination (eventEmitter)="onPagination($event)" [currentPage]="currentPage"
-                [totalPages]="bookList.pageInfo.totalPages" [fetchStatus]="bookList.fetchStatus"
-                                [size]="6" [payload]="bookList.books[0].owner.userId"></app-pagination>
+               <ng-container *ngIf="bookList.books">
+                 <app-pagination (eventEmitter)="onPagination($event)" [currentPage]="currentPage"
+                                 [totalPages]="bookList.pageInfo.totalPages" [fetchStatus]="bookList.fetchStatus"
+                                 [size]="6" [payload]="bookList.books[0].owner.userId"></app-pagination>
+               </ng-container>
               </ng-container>
 
             </ng-container>

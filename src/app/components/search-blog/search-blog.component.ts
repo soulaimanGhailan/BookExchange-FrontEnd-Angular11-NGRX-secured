@@ -34,20 +34,21 @@ export class SearchBlogComponent implements OnInit{
   }
 
   onSearch() {
-    this.router.navigateByUrl("/blog");
+
     let name = this.searchFrom.value.keyword;
     if(name == ''){
       this.store.dispatch(new GetBooksPageAction({page : 0 , size : 2}));
     }else
        this.store.dispatch(new SearchBookKeywordAction({pageSize:{size:2 , page:0} , data:name}))
+    this.router.navigateByUrl("/blog");
     this.eventEmitter.emit("Scroll Up");
 
   }
 
 
   onSearchByCategory(cat :string) {
-    this.router.navigateByUrl("/blog");
       this.store.dispatch(new SearchBookCategoryAction({pageSize:{size:2 , page:0} , data:cat}));
+    this.router.navigateByUrl("/blog");
     this.eventEmitter.emit("Scroll Up");
   }
 }
