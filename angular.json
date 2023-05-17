@@ -41,7 +41,8 @@
               "src/assets/template/js/jquery.flexslider.js",
               "src/assets/template/js/doubletaptogo.js",
               "src/assets/template/js/jquery-1.10.2.min.js",
-              "src/assets/template/js/jquery-migrate-1.2.1.min.js"
+              "src/assets/template/js/jquery-migrate-1.2.1.min.js",
+              "node_modules/keycloak-js/dist/keycloak.min.js"
             ]
           },
           "configurations": {
@@ -117,7 +118,8 @@
               "src/assets/template/js/jquery.flexslider.js",
               "src/assets/template/js/doubletaptogo.js",
               "src/assets/template/js/jquery-1.10.2.min.js",
-              "src/assets/template/js/jquery-migrate-1.2.1.min.js"
+              "src/assets/template/js/jquery-migrate-1.2.1.min.js",
+              "node_modules/keycloak-js/dist/keycloak.min.js"
             ]
           }
         }

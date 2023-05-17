@@ -44,8 +44,6 @@ export class SearchBlogComponent implements OnInit{
     this.eventEmitter.emit("Scroll Up");
 
   }
-
-
   onSearchByCategory(cat :string) {
       this.store.dispatch(new SearchBookCategoryAction({pageSize:{size:2 , page:0} , data:cat}));
     this.router.navigateByUrl("/blog");

@@ -14,7 +14,9 @@ export class ProfileUserInfoComponent implements OnInit{
   constructor(private userService : UserService) {
   }
   ngOnInit() {
-    this.userImageUrl=this.userService.getUserImageUrl(this.user.userId);
+    this.userService.getUserImageUrl(this.user.userId).subscribe({
+      next : data => this.userImageUrl ='data:image/jpeg;base64,' +data
+    });
     this.userService.getUserAddress(this.user.userId).subscribe({
       next : data => this.userAddress = data
     })

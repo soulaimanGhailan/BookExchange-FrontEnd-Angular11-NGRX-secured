@@ -10,9 +10,10 @@ export class UserService {
    host  : string = 'http://localhost:8085/user';
   constructor(private http : HttpClient) { }
 
-  public getUserImageUrl(userId: string) {
-    return this.host + "/"+userId+"/image";
+  public getUserImageUrl(userId: string):Observable<string> {
+      return this.http.get(this.host + "/"+userId+"/image" , { responseType: 'text' })
   }
+
   public getOtherUser(userId : string) : Observable<User>{
     return this.http.get<User>(this.host + "/" +userId);
   }

@@ -20,8 +20,12 @@ export class PostBlogComponent implements OnInit{
               private userService : UserService , private router :Router) {
   }
   ngOnInit() {
-    this.userImageSrc = this.userService.getUserImageUrl(this.book.owner.userId);
-    this.bookImageSrc=this.bookService.getBookImageUrl(this.book.bookId);
+    this.userService.getUserImageUrl(this.book.owner.userId).subscribe({
+      next : data => this.userImageSrc ='data:image/jpeg;base64,' +data
+    });
+    this.bookService.getBookImageUrl(this.book.bookId).subscribe({
+      next : data =>this.bookImageSrc = 'data:image/jpeg;base64,' + data
+    });
 
   }
 

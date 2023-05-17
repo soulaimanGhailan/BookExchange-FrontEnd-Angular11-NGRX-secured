@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -36,6 +36,26 @@ import {userProfileReducer} from "./ngrx/UsersProfileState/UsersProfile.reducers
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { PaginationComponent } from './components/blog/pagination/pagination.component';
 import { SingleOwnedBookComponent } from './components/profile/single-owned-book/single-owned-book.component';
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+
+export function initKeyClock(kcSecurity : KeycloakService) {
+  return () =>
+    kcSecurity.init({
+      config: {
+        url: 'http://localhost:8080/',
+        realm: 'bookRealm',
+        clientId: 'bookExchange'
+      },
+      initOptions: {
+        // onLoad: 'login-required',
+        onLoad: 'check-sso',
+        checkLoginIframe : true
+        // silentCheckSsoRedirectUri:
+        //   window.location.origin
+      }
+    });
+
+}
 
 @NgModule({
   declarations: [
@@ -73,9 +93,10 @@ import { SingleOwnedBookComponent } from './components/profile/single-owned-book
         EffectsModule.forRoot([BooksBlogEffect, CommentEffect, UsersProfilesEffect]),
         StoreDevtoolsModule.instrument(),
         BrowserAnimationsModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        KeycloakAngularModule
     ],
-  providers: [],
+  providers: [{provide : APP_INITIALIZER , deps:[KeycloakService] , useFactory:initKeyClock , multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

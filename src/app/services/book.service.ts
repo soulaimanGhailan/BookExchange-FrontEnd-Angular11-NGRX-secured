@@ -35,8 +35,9 @@ export class BookService implements OnInit {
     return this.http.get<User>(this.host + "/" + bookId + "/owner");
   }
 
-  getBookImageUrl(bookId: number) {
-    return this.host + "/" + bookId + "/image";
+
+  public getBookImageUrl(bookId : number) : Observable<string>{
+    return this.http.get(this.host + "/"+bookId+"/image" , { responseType: 'text' })
   }
 
   public getPageInfo(size : number , keyword : string ="" ,searchType : SearchType = SearchType.ALL):Observable<PageInfo> {

@@ -23,7 +23,9 @@ export class SingleOwnedBookComponent implements OnInit{
      this.ownerBook$?.subscribe({
        next : data => {
            // @ts-ignore
-         this.bookImgUrl=this.bookService.getBookImageUrl(data.book.bookId);
+         this.bookService.getBookImageUrl(data.book.bookId).subscribe({
+           next : d => this.bookImgUrl = 'data:image/jpeg;base64,' +d
+         });
          // @ts-ignore
          this.book=data.book;
        }

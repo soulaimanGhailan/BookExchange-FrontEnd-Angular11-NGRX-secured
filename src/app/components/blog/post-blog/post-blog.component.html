@@ -22,7 +22,8 @@
  </ol>
    <div class="post-thumb">
      <div>
-       <a  style="cursor: pointer;" (click)="goToPost()" title=""><img   width="200" height="500" alt="book-image" src="{{bookImageSrc}}" title="book-image"></a>
+       <a  style="cursor: pointer;" (click)="goToPost()" title=""><img   width="200" height="500" alt="book-image" [src]="bookImageSrc"  title="book-image"></a>
+
      </div>
    </div>
 

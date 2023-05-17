@@ -1,8 +1,7 @@
 import {Book} from "../../model/book.model";
 import {Action} from "@ngrx/store";
-import {BookAction, BookActionType, GetBooksPageActionError, GetBooksPageActionSuccess} from "./book.action";
+import {BookAction, BookActionType} from "./book.action";
 import {PageInfo} from "../../model/pageInfo.model";
-
 export enum BooksStateEnum{
   LOADING="Loading",
   LOADED ="Loaded",

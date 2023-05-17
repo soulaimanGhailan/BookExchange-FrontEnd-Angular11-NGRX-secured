@@ -20,7 +20,9 @@ export class CommentsReplaysComponent implements OnInit{
   }
   ngOnInit() {
     if(this.commentReply){
-      this.userImageSrc = this.userService.getUserImageUrl(this.commentReply.owner.userId);
+      this.userService.getUserImageUrl(this.commentReply.owner.userId).subscribe({
+        next : data => this.userImageSrc ='data:image/jpeg;base64,' +data
+      });
     }
     if(this.initReply){
       this.store.dispatch(new GetRepliesAction({data:this.commentId , pageSize:{page:0 , size:1}}));

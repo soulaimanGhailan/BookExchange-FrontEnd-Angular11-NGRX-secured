@@ -6,7 +6,6 @@ import {
   GetCommentAction,
   INITCommentAction,
 } from "../../../ngrx/commentsState/comment.action";
-import {PageInfo} from "../../../model/pageInfo.model";
 
 @Component({
   selector: 'app-comments',

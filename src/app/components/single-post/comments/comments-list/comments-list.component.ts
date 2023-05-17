@@ -25,7 +25,11 @@ export class CommentsListComponent implements OnInit{
               private fb : FormBuilder) {
   }
   ngOnInit() {
-    this.userImageSrc = this.userService.getUserImageUrl(this.comment.owner.userId);
+    this.userService.getUserImageUrl(this.comment.owner.userId).subscribe({
+      next : data => this.userImageSrc ='data:image/jpeg;base64,' +data
+    });
+
+
   }
 
   public getDate(){

@@ -16,7 +16,10 @@ export class ProfileBooksListComponent implements OnInit{
   constructor(private bookService : BookService , private store : Store<any> , private router : Router) {
   }
   ngOnInit() {
-    this.bookImageUrl =  this.bookService.getBookImageUrl(this.book.bookId);
+
+    this.bookService.getBookImageUrl(this.book.bookId).subscribe({
+      next : data =>this.bookImageUrl = 'data:image/jpeg;base64,' + data
+    });
   }
 
   goToBook() {
