@@ -7,7 +7,8 @@ export enum BooksStateEnum{
   LOADED ="Loaded",
   ERROR = "Error",
   INITIAL="Initial",
-  NEW="new"
+  NEW = "New Book" ,
+  EDIT="Edit Book"
 }
 export enum FetchState {
   All = 'all',
@@ -51,6 +52,15 @@ export function booksBlogReducer(state:BookState = initialBookBlogState , action
         return {...state , dataState : BooksStateEnum.LOADED , books:(<BookAction>action).payload.data ,
           pageInfo:(<BookAction>action).payload.pageInfo ,fetchStatus:FetchState.GetBooksOfUser}; break;
       case  BookActionType.GET_BOOk_OfUSER_ERROR : return {...state , dataState : BooksStateEnum.ERROR , errorMessage:(<BookAction>action).payload}; break;
+
+
+      //Save books of user
+      case  BookActionType.SAVE_BOOk_OfUSER : return {...state , dataState : BooksStateEnum.LOADING}; break;
+      case  BookActionType.SAVE_BOOk_OfUSER_SUCCESS :
+        return {...state , dataState : BooksStateEnum.LOADED , books:[(<BookAction>action).payload] ,
+          pageInfo:{totalPages :0 , totalElements:1}}; break;
+      case  BookActionType.SAVE_BOOk_OfUSER_ERROR: return {...state , dataState : BooksStateEnum.ERROR , errorMessage:(<BookAction>action).payload}; break;
+
 
       default : return {...state}; break;
     }

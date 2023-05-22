@@ -1,7 +1,7 @@
 <div class="bio cf">
 
   <div class="gravatar">
-    <img [src]="userImageSrc" alt="">
+    <img [src]="'data:image/jpeg;base64,'+owner.imageContentBase64" alt="">
   </div>
   <div class="about">
     <h5><a (click)="goToOwner()" title="Posts by John Doe" style="cursor: pointer" class="lining"  rel="author">{{owner.firstname + " "+owner.lastname}}</a></h5>

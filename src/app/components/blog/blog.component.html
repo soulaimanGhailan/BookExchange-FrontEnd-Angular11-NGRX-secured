@@ -1,10 +1,10 @@
 <!-- Content
 ================================================== -->
 <div class="content-outer">
-
+  <div #topOfPage></div>
   <div id="page-content" class="row">
     <div id="primary" class="eight columns">
-      <div #topOfPage></div>
+
 
       <ng-container *ngIf="BookPageList$ | async as state" [ngSwitch]="state.dataState">
          <ng-container *ngSwitchCase="BooksStateEnum.LOADING">

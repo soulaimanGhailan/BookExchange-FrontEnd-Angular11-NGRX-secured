@@ -1,15 +1,25 @@
 
   <div class="item-wrap">
     <a  style="cursor: pointer"  (click)="goToBook()">
-      <div class="container" [ngStyle]="{'background-image': 'url(' + bookImageUrl + ')'}">
+      <div class="container" [ngStyle]="{'background-image': 'url(' + 'data:image/jpeg;base64,'+book.imageContentBase64 + ')'}">
 
       </div>
 <!--      <img  alt="" src="{{bookImageUrl}}">-->
       <div class="overlay"></div>
-      <div class="link-icon"><i class="fa fa-link"></i></div>
+      <div class="link-icon">
+        <ng-container *ngIf="book.owner.userId == securityService.profile.id">
+          <div>
+            <i (click)="deleteBook($event)" class="fa fa-trash deleteAnimation"></i>
+          </div>
+          <br>
+          <div>
+            <i (click)="editBook($event)" class="fa fa-edit editAnimation" style=" margin-left: 8px"></i>
+          </div>
+        </ng-container>
+      </div>
     </a>
     <div class="portfolio-item-meta">
       <h5><a>{{book.bookTitle}}</a></h5>
-      <p>Illustrration</p>
+      <p>{{bookService.getDate(book)}}@{{bookService.getHour(book)}}</p>
     </div>
   </div>

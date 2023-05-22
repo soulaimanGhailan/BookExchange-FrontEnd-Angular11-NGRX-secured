@@ -1,9 +1,9 @@
 export interface User{
-  userId : string ;
+  userId : string;
   firstname:string;
   phoneNumber:string;
   lastname:string;
-  userImageSrc:string;
+  imageContentBase64 : string ;
   email : string;
 }
 export interface Address{
@@ -12,3 +12,8 @@ export interface Address{
   homeAddress: string;
   postCode : string;
 }
+export interface LoggedInUser {
+  userId : string |undefined;
+  username : string | undefined;
+}
+export const SIZE_OWNED_BOOKS_PAGING  = 4;

@@ -12,20 +12,29 @@ export interface Book{
   addingDate:string;
   owner:User;
   isbn :string;
-  bookImageSrc:string;
+  imageContentBase64 : string ;
+}
+export interface CreatedBook {
+  bookTitle: string | null;
+  bookStatus: string | null;
+  bookCategory: string | undefined;
+  description: string | null;
+  imageContentBase64 : string ;
+}
+export enum BookCategories {
+  AUTOBIOGRAPHY= "AUTOBIOGRAPHY" ,
+  BIOGRAPHY = "BIOGRAPHY",
+  ESSAYS  ="ESSAYS",
+  NONFICTIONNOVEL = "NONFICTIONNOVEL",
+  SELFHELP = "SELFHELP",
+  CLASSICS = "CLASSICS",
+  CRIME ="CRIME",
+  FANTASY ="FANTASY",
+  HORROR = "HORROR",
+  HUMOUR ="HUMOUR",
+  POETRY ="POETRY",
+  PLAYS ="PLAYS",
+
+
 }
 
-export enum BookCategories {
-  Autobiography= "Autobiography" ,
-  Biography = "Biography",
-  Essays  ="Essays",
-  NonFictionNovel = "NonFictionNovel",
-  SelfHelp = "SelfHelp",
-  Classics = "Classics",
-  CRIME ="CRIME",
-  Fantasy ="Fantasy",
-  Horror = "Horror",
-  Humour ="Humour",
-  Poetry ="Poetry",
-  Plays ="Plays",
-}

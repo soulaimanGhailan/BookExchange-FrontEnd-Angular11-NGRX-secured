@@ -12,7 +12,7 @@ import { PostBlogComponent } from './components/blog/post-blog/post-blog.compone
 import { SearchBlogComponent } from './components/search-blog/search-blog.component';
 import { PageFooterComponent } from './components/page-footer/page-footer.component';
 import {HttpClientModule} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {EffectsModule} from "@ngrx/effects";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {BooksBlogEffect} from "./ngrx/booksBlogState/book.effect";
@@ -23,7 +23,7 @@ import { CommentsComponent } from './components/single-post/comments/comments.co
 import { OwnerInfoComponent } from './components/single-post/owner-info/owner-info.component';
 import { CommentsListComponent } from './components/single-post/comments/comments-list/comments-list.component';
 import { CommentFormComponent } from './components/single-post/comments/comment-form/comment-form.component';
-import {postReducer} from "./ngrx/singlePostState/post.reducer";
+import {singleBookReducer} from "./ngrx/singleBookState/SingleBook.reducer";
 import {CommentsReducer} from "./ngrx/commentsState/comment.reducer";
 import {CommentEffect} from "./ngrx/commentsState/comment.effect";
 import { CommentsReplaysComponent } from './components/single-post/comments/comments-list/comments-replays/comments-replays.component';
@@ -37,6 +37,10 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import { PaginationComponent } from './components/blog/pagination/pagination.component';
 import { SingleOwnedBookComponent } from './components/profile/single-owned-book/single-owned-book.component';
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+import { AddBookComponent } from './components/profile/add-book/add-book.component';
+import {MatInputModule} from "@angular/material/input";
+import { AddOtherBookComponent } from './components/profile/add-book/add-other-book/add-other-book.component';
+import { EditBookComponent } from './components/profile/edit-book/edit-book.component';
 
 export function initKeyClock(kcSecurity : KeycloakService) {
   return () =>
@@ -79,23 +83,30 @@ export function initKeyClock(kcSecurity : KeycloakService) {
     ProfileUserInfoComponent,
     PaginationComponent,
     SingleOwnedBookComponent,
+    AddBookComponent,
+    AddOtherBookComponent,
+    EditBookComponent,
+
+
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        StoreModule.forRoot({
-            booksBlog: booksBlogReducer, singlePostBook: postReducer, CommentsPost: CommentsReducer,
-            UsersProfile: userProfileReducer
-        }),
-        EffectsModule.forRoot([BooksBlogEffect, CommentEffect, UsersProfilesEffect]),
-        StoreDevtoolsModule.instrument(),
-        BrowserAnimationsModule,
-        MatPaginatorModule,
-        KeycloakAngularModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    StoreModule.forRoot({
+      booksBlog: booksBlogReducer, singleBook: singleBookReducer, CommentsPost: CommentsReducer,
+      UsersProfile: userProfileReducer
+    }),
+    EffectsModule.forRoot([BooksBlogEffect, CommentEffect, UsersProfilesEffect]),
+    StoreDevtoolsModule.instrument(),
+    BrowserAnimationsModule,
+    MatPaginatorModule,
+    KeycloakAngularModule,
+    MatInputModule,
+    FormsModule
+  ],
   providers: [{provide : APP_INITIALIZER , deps:[KeycloakService] , useFactory:initKeyClock , multi:true}],
   bootstrap: [AppComponent]
 })

@@ -2,7 +2,7 @@
   <div id="team-wrapper">
     <div class="column member">
 
-      <img src="{{userImageUrl}}" alt=""/>
+      <img src="{{'data:image/jpeg;base64,'+user.imageContentBase64}}" alt=""/>
 
       <div class="member-name">
         <h4 style="font-weight: bold">{{user.firstname}}  {{user.lastname}}</h4>
@@ -37,6 +37,13 @@
         <a class="lining">Twitter:: </a> <a href="#">@</a><br> <br>
         <a class="lining">Facebook:</a> <a href="#"> FB Page</a><br> <br>
       </p>
+
+      <ng-container *ngIf="user.userId == securityService.profile.id">
+        <a (click)="editProfile()" class="button" style="width: 150px">Edit profile</a> <br> <br>
+        <a (click)="addBook()" class="button" style="width: 150px">Add Book</a>
+      </ng-container>
+
+
     </div>
   </aside>
 </div> <!-- Secondary End-->

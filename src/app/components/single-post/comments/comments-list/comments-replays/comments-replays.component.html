@@ -2,7 +2,7 @@
   <li class="depth-3">
 
     <div class="avatar" style="margin-left: 160px;">
-      <img (click)="goToOwnerProfile()" style="cursor: pointer" width="50" height="50" class="avatar" src="{{userImageSrc}}" alt="">
+      <img (click)="goToOwnerProfile()" style="cursor: pointer" width="50" height="50" class="avatar" src="{{'data:image/jpeg;base64,'+commentReply.owner.imageContentBase64}}" alt="">
     </div>
 
     <div class="comment-info">

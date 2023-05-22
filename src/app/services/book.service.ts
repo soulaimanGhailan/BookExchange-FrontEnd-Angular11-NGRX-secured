@@ -1,21 +1,22 @@
-import {Injectable, OnInit} from '@angular/core';
+import {EventEmitter, Injectable, OnInit, Output} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Book} from "../model/book.model";
-import {User} from "../model/user.model";
+import {Book, CreatedBook} from "../model/book.model";
+import {SIZE_OWNED_BOOKS_PAGING, User} from "../model/user.model";
 import {PageInfo, PageSize} from "../model/pageInfo.model";
 import {ActionPayload, SearchType} from "../model/payload.model";
 import {Observable} from "rxjs";
 import {GetBooksOfUserAction} from "../ngrx/booksBlogState/book.action";
 import {Store} from "@ngrx/store";
 import {Router} from "@angular/router";
-import {GetOtherProfileAction} from "../ngrx/UsersProfileState/UsersProfile.action";
+import {GetProfileAction} from "../ngrx/UsersProfileState/UsersProfile.action";
+import {GetSingleBookAction} from "../ngrx/singleBookState/SingleBook.action";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService implements OnInit {
   host: string = 'http://localhost:8085/book';
-
   constructor(private http: HttpClient ,
               private store : Store ,private router : Router) {
   }
@@ -67,11 +68,41 @@ export class BookService implements OnInit {
   }
 
 
-  goToOwnerProfile(page : number , userId:string) {
-    this.store.dispatch(new GetOtherProfileAction(userId));
-    this.store.dispatch(new GetBooksOfUserAction({data:userId , pageSize:{page:page , size:6}}));
+  public goToOwnerProfile(page : number , userId:string) {
+    this.store.dispatch(new GetProfileAction(userId));
+    this.store.dispatch(new GetBooksOfUserAction({data:userId , pageSize:{page:page , size:SIZE_OWNED_BOOKS_PAGING}}));
     this.router.navigateByUrl("/profile");
   }
+
+
+  public getDate(book : Book){
+    return book.addingDate.slice(0 ,10);
+  }
+
+  public getHour(book : Book) {
+    return book.addingDate.slice(11 ,16)
+  }
+
+
+  public addBookToUser(userId : string  , book : CreatedBook ):Observable<Book>{
+    book = {...book , bookCategory:book.bookCategory?.toUpperCase()}
+    return this.http.post<Book>(this.host +"/"+ userId  , book);
+  }
+
+  goToPost(book :Book) {
+    this.store.dispatch(new GetSingleBookAction(book));
+    this.router.navigateByUrl("/singlePost");
+  }
+
+  public deleteBook(bookId :number):Observable<Book>{
+    return this.http.delete<Book>(this.host +"/"+bookId);
+
+  }
+  public editBook(book : Book):Observable<Book>{
+    console.log(book)
+    return this.http.put<Book>(this.host , book);
+  }
+
 
 }
 

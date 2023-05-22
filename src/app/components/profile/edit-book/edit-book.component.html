@@ -1,0 +1,61 @@
+
+<div class="content-outer">
+
+  <div id="page-content" class="row">
+
+    <div id="primary" class="eight columns" style="margin-top: 50px">
+     <ng-container *ngIf="singleBookState$  as bookState ">
+       <ng-container *ngIf=" bookEnum.EDIT == bookState.dataState && bookState.book">
+
+       <form [formGroup]="newBookForm" (ngSubmit)="editBook(bookState.book)">
+         <div class="form-group mt-3">
+           <label>Book Title</label>
+           <input type="text" formControlName="title"  class="form-control"
+                  [ngClass]="{'is-invalid' : submitted && newBookForm.controls['title'].errors}">
+           <div *ngIf="submitted && newBookForm.controls['title'].errors" class="invalid-feedback">
+             <div *ngIf="newBookForm.controls['title'].errors"> title is Required</div>
+           </div>
+         </div>
+
+         <div class="message cf">
+           <label  for="cMessage">Book Description </label>
+           <textarea name="cMessage" formControlName="bookDescription"  id="cMessage" rows="1" cols="100"
+                     [ngClass]="{'is-invalid' : submitted && newBookForm.controls['bookDescription'].errors}"></textarea>
+           <div *ngIf="submitted && newBookForm.controls['bookDescription'].errors" class="invalid-feedback">
+             <div *ngIf="newBookForm.controls['bookDescription'].errors"> bookDescription is Required</div>
+           </div>
+           <small class="form-text text-muted">add description to be shown in books post</small>
+         </div>
+         <br>
+         <label>Category <br> <br>
+           <select  class="form-control  form-control-lg" formControlName="category"
+                    [ngClass]="{'is-invalid' : submitted && newBookForm.controls['category'].errors}">
+             <option></option>
+             <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+           </select>
+           <div *ngIf="submitted && newBookForm.controls['category'].errors" class="invalid-feedback">
+             <div *ngIf="newBookForm.controls['category'].errors"> category is Required</div>
+           </div>
+         </label>
+
+         <div class="form-group">
+           <label for="exampleFormControlFile1">Book image</label>
+           <input formControlName="bookPicture" (change)="onFileSelected($event)" type="file" class="form-control-file" id="exampleFormControlFile1">
+         </div>
+         <br> <br>
+         <button  type="submit" class="button">Save</button> <br> <br>
+       </form>
+       </ng-container>
+     </ng-container>
+    </div>
+    <div id="secondary" class="four columns end">
+
+      <aside id="sidebar">
+        <app-search-blog></app-search-blog>
+      </aside>
+
+    </div>
+
+  </div>
+
+</div>

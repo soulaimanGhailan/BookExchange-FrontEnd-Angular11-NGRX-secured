@@ -15,7 +15,6 @@ import {BookService} from "../../../../services/book.service";
 })
 export class CommentsListComponent implements OnInit{
   @Input() comment! : Comment;
-  userImageSrc! :string;
   replyForm! : FormGroup;
   @ViewChild('replyDiv', { static: true }) replyDiv!: ElementRef<HTMLDivElement>;
   constructor(private userService : UserService ,
@@ -24,13 +23,7 @@ export class CommentsListComponent implements OnInit{
               private commentService : CommentsService ,
               private fb : FormBuilder) {
   }
-  ngOnInit() {
-    this.userService.getUserImageUrl(this.comment.owner.userId).subscribe({
-      next : data => this.userImageSrc ='data:image/jpeg;base64,' +data
-    });
-
-
-  }
+  ngOnInit() {}
 
   public getDate(){
     return this.comment.commentDate.slice(0 ,10);

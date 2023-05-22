@@ -24,8 +24,8 @@
           </li>
           <li><span><a style="cursor: pointer;" (click)="onProfile()">Portfolio</a></span>
             <ul>
-              <li><a style="cursor: pointer;">Portfolio Index</a></li>
-              <li><a style="cursor: pointer;">Portfolio Entry</a></li>
+              <li  *ngIf="!securityService.profile"><a (click)="login()" style="cursor: pointer;">Login</a></li>
+              <li  *ngIf="securityService.profile"><a (click)="logout()" style="cursor: pointer;">Log out</a></li>
             </ul>
           </li>
           <li><a style="cursor: pointer;">About</a></li>

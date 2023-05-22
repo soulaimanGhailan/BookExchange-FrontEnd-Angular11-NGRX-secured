@@ -17,8 +17,8 @@
             </div>
 
             <ul class="portfolio-meta-list">
-              <li><span>Date: </span>{{getDate()}}</li>
-              <li><span>Hout </span>{{getHour()}}</li>
+              <li><span>Date: </span>{{bookService.getDate(bookState.book)}}</li>
+              <li><span>Hout </span>{{bookService.getHour(bookState.book)}}</li>
               <li><span>Skills: </span>Photoshop, Photography, Branding</li>
             </ul>
 
@@ -30,7 +30,7 @@
 
             <div class="entry-media">
 
-              <img src="{{bookImgUrl}}" alt="" />
+              <img src="{{'data:image/jpeg;base64,'+book.imageContentBase64}}" alt="" />
 
             </div>
 
@@ -41,6 +41,7 @@
                 cursus a sit amet mauris. Morbi accumsan ipsum velit. </p>
 
             </div>
+
 
           </div> <!-- primary end-->
         </ng-container>

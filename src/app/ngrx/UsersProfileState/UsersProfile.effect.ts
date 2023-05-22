@@ -4,9 +4,9 @@ import {Store} from "@ngrx/store";
 import {UserService} from "../../services/user.service";
 import {catchError, map, mergeMap, Observable, of} from "rxjs";
 import {
-  GetOtherProfileActionError,
-  GetOtherProfileActionSuccess,
-  GetOtherProfileActionType,
+  GetProfileActionError,
+  GetProfileActionSuccess,
+  GetProfileActionType,
   OtherProfilesAction
 } from "./UsersProfile.action";
 
@@ -17,12 +17,12 @@ export class UsersProfilesEffect {
 
   GetOtherProfile:Observable<OtherProfilesAction>=createEffect(
     ()=>this.effectActions.pipe(
-      ofType(GetOtherProfileActionType.GET_OTHER_PROFILE),
+      ofType(GetProfileActionType.GET_PROFILE),
       mergeMap((action:OtherProfilesAction)=>{
         return this.userService.getOtherUser(action.payload)
           .pipe(
-            map((user)=>  new GetOtherProfileActionSuccess({data:user , pageInfo:{totalPages:0 , totalElements:0}})),
-            catchError((err)=>of(new GetOtherProfileActionError(err.message)))
+            map((user)=>  new GetProfileActionSuccess(user)),
+            catchError((err)=>of(new GetProfileActionError(err.message)))
           )
       })
     )

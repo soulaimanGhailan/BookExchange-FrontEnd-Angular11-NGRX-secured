@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {Router} from "@angular/router";
+import {SecurityService} from "../../../security/security.service";
+import {BookService} from "../../../services/book.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,7 +10,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit{
-  constructor(private store : Store<any> , private router : Router) {
+  constructor(private store : Store<any> , private router : Router  ,
+              public securityService:SecurityService , public bookService : BookService) {
   }
   ngOnInit() {
   }
@@ -18,7 +21,11 @@ export class NavBarComponent implements OnInit{
   }
 
   onProfile() {
-    this.router.navigateByUrl("/profile");
+    if(this.securityService.profile){
+        if(this.securityService.profile.id){
+        this.bookService.goToOwnerProfile(0 , this.securityService.profile.id)
+        }
+    }
   }
 
   onHome() {
@@ -27,5 +34,15 @@ export class NavBarComponent implements OnInit{
 
   onSinglePost() {
     this.router.navigateByUrl("/singlePost")
+  }
+
+  async login() {
+    await this.securityService.kcService.login({
+      redirectUri :window.location.origin
+    })
+  }
+
+  logout() {
+      this.securityService.kcService.logout(window.location.origin);
   }
 }

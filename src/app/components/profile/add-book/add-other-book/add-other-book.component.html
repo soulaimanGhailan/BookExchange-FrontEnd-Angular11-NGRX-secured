@@ -1,0 +1,43 @@
+<div class="content-outer">
+
+  <div id="page-content" class="row">
+
+    <div id="primary" class="eight columns" style="margin-top: 50px">
+          <ng-container *ngIf="bookState$ |async as state" [ngSwitch]="state.dataState"  >
+                <ng-container *ngSwitchCase="bookEnum.LOADING">
+                  <div class="entry-header cf">
+                    <h1>book is being saved..................</h1>
+                  </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="bookEnum.ERROR">
+                  <div class="entry-header cf">
+                    <h1 class="text-danger">{{state.errorMessage}}</h1>
+                  </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="bookEnum.INITIAL">
+                  <div class="entry-header cf">
+                    <h1 class="text-danger"> initial state </h1>
+                  </div>
+                </ng-container>
+                <ng-container  *ngSwitchCase="bookEnum.LOADED">
+                  <div class="alert-success container p-3 m-3">
+                      <h1>Book {{state.books[0].bookTitle}} is added Successfully</h1>
+                    <button lass="button m-2" (click)="otherBook()">Add an other Book</button>
+                    <button class="button m-2" (click)="profile()">Go To Profile</button>
+                    <button lass="button m-2" (click)="bookService.goToPost(state.books[0])">Go To Post</button>
+                  </div>
+                </ng-container>
+              </ng-container>
+    </div>
+          <div id="secondary" class="four columns end">
+
+            <aside id="sidebar">
+              <app-search-blog></app-search-blog>
+            </aside>
+
+          </div>
+
+  </div>
+
+</div>
+

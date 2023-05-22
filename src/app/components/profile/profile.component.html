@@ -22,9 +22,12 @@
           </div>
         </ng-container>
         <ng-container *ngSwitchCase="profileStateEnum.LOADED">
-          <app-profile-user-info [user]="profileState.profiles[0]"></app-profile-user-info>
+          <ng-container *ngIf="profileState.profiles">
+            <app-profile-user-info [user]="profileState.profiles"></app-profile-user-info>
+          </ng-container>
         </ng-container>
       </ng-container>
+
 
       <div>
         <h1 style="font-weight: bold ; margin-left: 150px">Book List Of this Profile</h1> <br> <br> <br>
@@ -52,11 +55,12 @@
                   <app-profile-books-list [book]="book"></app-profile-books-list>
                 </div>
               </div>
+
             <!-- pagination-->
-               <ng-container *ngIf="bookList.books">
+               <ng-container *ngIf="bookList.books.length != 0">
                  <app-pagination (eventEmitter)="onPagination($event)" [currentPage]="currentPage"
                                  [totalPages]="bookList.pageInfo.totalPages" [fetchStatus]="bookList.fetchStatus"
-                                 [size]="6" [payload]="bookList.books[0].owner.userId"></app-pagination>
+                                 [size]="size" [payload]="bookList.books[0].owner.userId"></app-pagination>
                </ng-container>
               </ng-container>
 

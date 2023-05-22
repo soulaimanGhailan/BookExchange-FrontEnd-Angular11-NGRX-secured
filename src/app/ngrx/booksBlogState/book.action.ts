@@ -1,6 +1,6 @@
 import {Action} from "@ngrx/store";
-import {ActionPayload, ResultPayLoad} from "../../model/payload.model";
-import {Book} from "../../model/book.model";
+import {ActionPayload, BookUerId, ResultPayLoad} from "../../model/payload.model";
+import {Book, CreatedBook} from "../../model/book.model";
 
 export enum BookActionType{
   GET_BOOkS_PAGE="[Book] Get Books page",
@@ -20,7 +20,17 @@ export enum BookActionType{
   //search book by category action
   GET_BOOk_OfUSER="[Book] GET  Books of user",
   GET_BOOk_OfUSER_SUCCESS="[Book] GET  Books of user Success",
-  GET_BOOk_OfUSER_ERROR="[Book] GET  Books of user Error"
+  GET_BOOk_OfUSER_ERROR="[Book] GET  Books of user Error" ,
+
+  //SAVE new book
+  SAVE_BOOk_OfUSER="[Book] SAVE  Books of user",
+  SAVE_BOOk_OfUSER_SUCCESS="[Book] SAVE  Books of user Success",
+  SAVE_BOOk_OfUSER_ERROR="[Book] SAVE  Books of user Error",
+
+  //DELETE new book
+  DELETE_BOOk_OfUSER="[Book] DELETE  Books of user",
+  DELETE_BOOk_OfUSER_SUCCESS="[Book] DELETE  Books of user Success",
+  DELETE_BOOk_OfUSER_ERROR="[Book] DELETE  Books of user Error"
 }
 
 
@@ -96,8 +106,45 @@ export class GetBooksOfUserActionError implements Action{
   }
 }
 
+
+//Save  Book of user action
+export class SaveBooksOfUserAction implements Action{
+  type: BookActionType = BookActionType.SAVE_BOOk_OfUSER;
+  constructor(public payload : BookUerId) {
+  }
+}
+export class SaveBooksOfUserActionSuccess implements Action{
+  type: BookActionType = BookActionType.SAVE_BOOk_OfUSER_SUCCESS;
+  constructor(public payload : Book) {
+  }
+}
+export class SaveBooksOfUserActionError implements Action{
+  type: BookActionType = BookActionType.SAVE_BOOk_OfUSER_ERROR;
+  constructor(public payload : string) {
+  }
+}
+
+//DELETE  Book of user action
+export class DELETEBooksOfUserAction implements Action{
+  type: BookActionType = BookActionType.DELETE_BOOk_OfUSER;
+  constructor(public payload : number) {
+  }
+}
+export class DELETEBooksOfUserActionSuccess implements Action{
+  type: BookActionType = BookActionType.DELETE_BOOk_OfUSER_SUCCESS;
+  constructor(public payload : Book) {
+  }
+}
+export class DELETEBooksOfUserActionError implements Action{
+  type: BookActionType = BookActionType.DELETE_BOOk_OfUSER_ERROR;
+  constructor(public payload : string) {
+  }
+}
+
 export type BookAction =
   GetBooksPageAction | GetBooksPageActionError | GetBooksPageActionSuccess
   |SearchBookKeywordAction |SearchBookKeywordActionError|SearchBookKeywordActionSuccess
   |SearchBookCategoryAction|SearchBookCategoryActionSuccess|SearchBookCategoryActionError
-  |GetBooksOfUserAction|GetBooksOfUserActionSuccess|GetBooksOfUserActionError;
+  |GetBooksOfUserAction|GetBooksOfUserActionSuccess|GetBooksOfUserActionError
+  |SaveBooksOfUserAction | SaveBooksOfUserAction|SaveBooksOfUserAction
+  |DELETEBooksOfUserAction|DELETEBooksOfUserActionSuccess|DELETEBooksOfUserActionError;

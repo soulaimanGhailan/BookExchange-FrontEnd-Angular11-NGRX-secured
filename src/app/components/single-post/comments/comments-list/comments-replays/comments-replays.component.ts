@@ -15,15 +15,9 @@ export class CommentsReplaysComponent implements OnInit{
   @Input() commentReply! : Comment;
   @Input() commentId! : number;
   @Input() initReply : boolean =false;
-  userImageSrc! :string ;
   constructor(private store :Store , private userService : UserService , private bookService : BookService) {
   }
   ngOnInit() {
-    if(this.commentReply){
-      this.userService.getUserImageUrl(this.commentReply.owner.userId).subscribe({
-        next : data => this.userImageSrc ='data:image/jpeg;base64,' +data
-      });
-    }
     if(this.initReply){
       this.store.dispatch(new GetRepliesAction({data:this.commentId , pageSize:{page:0 , size:1}}));
     }

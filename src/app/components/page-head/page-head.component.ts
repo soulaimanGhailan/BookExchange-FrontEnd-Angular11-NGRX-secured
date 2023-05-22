@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {SecurityService} from "../../security/security.service";
 
 @Component({
   selector: 'app-page-head',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./page-head.component.css']
 })
 export class PageHeadComponent {
+  constructor() {
+  }
 
 }

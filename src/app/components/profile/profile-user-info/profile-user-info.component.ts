@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Address, User} from "../../../model/user.model";
 import {UserService} from "../../../services/user.service";
+import {SecurityService} from "../../../security/security.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile-user-info',
@@ -10,16 +12,20 @@ import {UserService} from "../../../services/user.service";
 export class ProfileUserInfoComponent implements OnInit{
   @Input() user! : User;
   userAddress! : Address;
-  userImageUrl! : string;
-  constructor(private userService : UserService) {
+  constructor(private userService : UserService , public securityService : SecurityService , private router : Router) {
   }
   ngOnInit() {
-    this.userService.getUserImageUrl(this.user.userId).subscribe({
-      next : data => this.userImageUrl ='data:image/jpeg;base64,' +data
-    });
+
     this.userService.getUserAddress(this.user.userId).subscribe({
       next : data => this.userAddress = data
     })
   }
 
+  addBook() {
+      this.router.navigateByUrl("/addBook")
+  }
+
+  editProfile() {
+
+  }
 }

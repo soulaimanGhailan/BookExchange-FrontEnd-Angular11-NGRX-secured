@@ -17,10 +17,9 @@ export class BlogComponent implements OnInit{
   FetchState= FetchState;
   @ViewChild('topOfPage', { static: true }) topOfPage!: ElementRef<HTMLDivElement>;
   static index: number =0;
-  constructor(private store : Store<any>) {
+  constructor(private store : Store<any> ) {
   }
   ngOnInit() {
-    // this.topOfPage.nativeElement.scrollIntoView();
     this.BookPageList$ = this.store.pipe(
       map(state => state.booksBlog)
     );

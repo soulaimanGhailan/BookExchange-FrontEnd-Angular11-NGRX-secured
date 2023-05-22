@@ -4,9 +4,14 @@ import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {catchError, map, mergeMap, Observable, of} from "rxjs";
 import {
   BookAction,
-  BookActionType, GetBooksOfUserActionError, GetBooksOfUserActionSuccess,
+  BookActionType, DELETEBooksOfUserActionError, DELETEBooksOfUserActionSuccess,
+  GetBooksOfUserActionError,
+  GetBooksOfUserActionSuccess,
   GetBooksPageActionError,
-  GetBooksPageActionSuccess, SearchBookCategoryActionError, SearchBookCategoryActionSuccess,
+  GetBooksPageActionSuccess, SaveBooksOfUserActionError,
+  SaveBooksOfUserActionSuccess,
+  SearchBookCategoryActionError,
+  SearchBookCategoryActionSuccess,
   SearchBookKeywordActionError,
   SearchBookKeywordActionSuccess
 } from "./book.action";
@@ -84,6 +89,34 @@ export class BooksBlogEffect{
             )
           }),
           catchError(err => of(new GetBooksOfUserActionError(err.message)))
+        )
+      })
+    )
+  );
+
+  addBookToUser:Observable<BookAction>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(BookActionType.SAVE_BOOk_OfUSER),
+      mergeMap((action : BookAction) => {
+            return this.bookService.addBookToUser(action.payload.userId ,action.payload.book).pipe(
+              map(book => {
+                return new SaveBooksOfUserActionSuccess(book);
+              }),
+          catchError(err => of(new SaveBooksOfUserActionError(err.message)))
+        )
+      })
+    )
+  );
+
+  deleteBook:Observable<BookAction>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(BookActionType.DELETE_BOOk_OfUSER),
+      mergeMap((action : BookAction) => {
+        return this.bookService.deleteBook(action.payload).pipe(
+          map(book => {
+            return new DELETEBooksOfUserActionSuccess(book);
+          }),
+          catchError(err => of(new DELETEBooksOfUserActionError(err.message)))
         )
       })
     )
