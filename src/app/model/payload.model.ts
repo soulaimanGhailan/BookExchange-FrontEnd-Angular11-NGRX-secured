@@ -20,3 +20,16 @@ export interface BookUerId{
   userId : string ;
   book  : CreatedBook;
 }
+export enum UpdateUserFieldType{
+  UpdatePICTURE = "UpdatePICTURE" ,
+  UpdateCITY = "UpdateCITY" ,
+  UpdateCOUNTRY = "UpdateCOUNTRY" ,
+  UpdateHOMEADDRESS = "UpdateHOMEADDRESS" ,
+  UpdatePhoneNum = "UpdatePhoneNum" ,
+}
+export interface UpdateUserPayload {
+  updateUserFieldType : UpdateUserFieldType ;
+  userId : string|undefined;
+  data : string ;
+
+}

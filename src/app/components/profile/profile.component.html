@@ -8,7 +8,7 @@
       <ng-container *ngIf="profileState$ | async as profileState" [ngSwitch]="profileState.dataState">
         <ng-container *ngSwitchCase="profileStateEnum.LOADING">
           <div class="entry-header cf">
-            <h1>Books Loading..................</h1>
+            <h1>Profile Loading..................</h1>
           </div>
         </ng-container>
         <ng-container *ngSwitchCase="profileStateEnum.ERROR">

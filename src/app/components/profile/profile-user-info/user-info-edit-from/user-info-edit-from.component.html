@@ -1,0 +1,14 @@
+<form *ngIf="editFormGroup" (ngSubmit)="modifyUserInfo()" [formGroup]="editFormGroup">
+  <div class="cf">
+    <label for="reply">  <span class="required">*</span></label>
+    <input formControlName = "inputValue" height="10px"   type="text" id="reply" size="10" value=""
+           [ngClass]="{'is-invalid' : submitted && editFormGroup.controls['inputValue'].errors}">
+
+    <div *ngIf="submitted && editFormGroup.controls['inputValue'].errors" class="invalid-feedback">
+      <div *ngIf="editFormGroup.controls['inputValue'].errors"> input value is Required</div>
+    </div>
+    <nav class="col full pagination">
+      <button type="submit" style="">MODIFY</button>
+    </nav>
+  </div>
+</form>

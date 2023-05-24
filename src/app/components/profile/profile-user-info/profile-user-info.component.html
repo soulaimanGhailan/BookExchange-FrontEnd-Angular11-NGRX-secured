@@ -2,8 +2,21 @@
   <div id="team-wrapper">
     <div class="column member">
 
-      <img src="{{'data:image/jpeg;base64,'+user.imageContentBase64}}" alt=""/>
+      <img style="cursor: pointer" (click)="modifyProfilePicInit()" src="{{'data:image/jpeg;base64,'+user.imageContentBase64}}" alt=""/>
+      <div *ngIf="profilePic" class="form-group">
+        <form [formGroup]="modifyImageGroup" *ngIf="modifyImageGroup" (ngSubmit)="modifyProfilePic()">
+          <input formControlName="profilePicture" (change)="onFileSelected($event)" type="file" class="form-control-file"
+                 [ngClass]="{'is-invalid' : submitted && modifyImageGroup.controls['profilePicture'].errors}">
 
+          <div *ngIf="submitted && modifyImageGroup.controls['profilePicture'].errors" class="invalid-feedback">
+            <div *ngIf="modifyImageGroup.controls['profilePicture'].errors"> profile picture is Required</div>
+          </div>
+
+          <br> <br>
+          <button type="submit">Edit Picture</button>
+        </form>
+      </div>
+      <br> <br>
       <div class="member-name">
         <h4 style="font-weight: bold">{{user.firstname}}  {{user.lastname}}</h4>
         <span>books owner</span>
@@ -24,11 +37,20 @@
       <h5>Address and Phone</h5>
       <p class="address">
         <ng-container *ngIf="userAddress">
-          <a class="lining">Country: </a>{{userAddress.country}}<br> <br>
-          <a class="lining">City: </a>{{userAddress.city}}<br> <br>
-          <a class="lining">HomeAddress: </a>{{userAddress.homeAddress}}<br> <br>
+          <a (click)="onCountry()" style="cursor: pointer" class="lining">Country: </a>{{userAddress.country}}<br> <br>
+          <app-user-info-edit-from *ngIf="country"  [updateFieldType]="updateUserFieldType.UpdateCOUNTRY" [initialValue]="userAddress.country"></app-user-info-edit-from>
+
+          <a style="cursor: pointer" (click)="onCity()" class="lining">City: </a>{{userAddress.city}}<br> <br>
+          <app-user-info-edit-from *ngIf="city" [updateFieldType]="updateUserFieldType.UpdateCITY" [initialValue]="userAddress.city"></app-user-info-edit-from>
+
+          <a style="cursor: pointer" class="lining" (click)="onHomeAddress()">HomeAddress: </a>{{userAddress.homeAddress}}<br> <br>
+          <app-user-info-edit-from *ngIf="homeAddress" [updateFieldType]="updateUserFieldType.UpdateHOMEADDRESS" [initialValue]="userAddress.homeAddress"></app-user-info-edit-from>
+
         </ng-container>
-        <a class="lining">Phone number: </a><span>{{user.phoneNumber}}</span>
+
+        <a (click)="onPhoneNum()" style="cursor: pointer" class="lining" style="cursor: pointer">Phone number: </a><span>{{user.phoneNumber}}</span>
+        <app-user-info-edit-from  *ngIf="phoneNum" [updateFieldType]="updateUserFieldType.UpdatePhoneNum" [initialValue]="user.phoneNumber"></app-user-info-edit-from>
+
       </p>
       <br>
       <h5>Email and Social</h5>

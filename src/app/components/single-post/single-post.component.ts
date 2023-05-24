@@ -14,11 +14,9 @@ export class SinglePostComponent implements OnInit{
   constructor(private store :Store<any> , private bookService : BookService) {
   }
   ngOnInit() {
-
     this.post$ = this.store.pipe(
       map(state => state.singleBook)
     )
 
   }
-
 }

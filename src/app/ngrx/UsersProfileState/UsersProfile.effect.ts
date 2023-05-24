@@ -6,24 +6,38 @@ import {catchError, map, mergeMap, Observable, of} from "rxjs";
 import {
   GetProfileActionError,
   GetProfileActionSuccess,
-  GetProfileActionType,
-  OtherProfilesAction
+  ProfilesAction,
+  ProfileActionType, UpdateProfileActionSuccess, UpdateProfileActionError
 } from "./UsersProfile.action";
+import {UpdateUserFieldType} from "../../model/payload.model";
 
 @Injectable()
 export class UsersProfilesEffect {
   constructor(private userService: UserService, private effectActions: Actions, private store: Store) {
   }
 
-  GetOtherProfile:Observable<OtherProfilesAction>=createEffect(
+  GetProfile:Observable<ProfilesAction>=createEffect(
     ()=>this.effectActions.pipe(
-      ofType(GetProfileActionType.GET_PROFILE),
-      mergeMap((action:OtherProfilesAction)=>{
-        return this.userService.getOtherUser(action.payload)
+      ofType(ProfileActionType.GET_PROFILE),
+      mergeMap((action:ProfilesAction)=>{
+        return this.userService.getUser(action.payload)
           .pipe(
             map((user)=>  new GetProfileActionSuccess(user)),
             catchError((err)=>of(new GetProfileActionError(err.message)))
           )
+      })
+    )
+  );
+
+  updateProfile:Observable<ProfilesAction>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(ProfileActionType.UPDATE_PROFILE),
+      mergeMap((action:ProfilesAction)=>{
+            return this.userService.updateUserInfo(action.payload)
+              .pipe(
+                map((user)=>  new UpdateProfileActionSuccess(user)),
+                catchError((err)=>of(new UpdateProfileActionError(err.message)))
+              )
       })
     )
   );

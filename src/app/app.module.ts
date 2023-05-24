@@ -41,6 +41,7 @@ import { AddBookComponent } from './components/profile/add-book/add-book.compone
 import {MatInputModule} from "@angular/material/input";
 import { AddOtherBookComponent } from './components/profile/add-book/add-other-book/add-other-book.component';
 import { EditBookComponent } from './components/profile/edit-book/edit-book.component';
+import { UserInfoEditFromComponent } from './components/profile/profile-user-info/user-info-edit-from/user-info-edit-from.component';
 
 export function initKeyClock(kcSecurity : KeycloakService) {
   return () =>
@@ -86,6 +87,7 @@ export function initKeyClock(kcSecurity : KeycloakService) {
     AddBookComponent,
     AddOtherBookComponent,
     EditBookComponent,
+    UserInfoEditFromComponent,
 
 
 
