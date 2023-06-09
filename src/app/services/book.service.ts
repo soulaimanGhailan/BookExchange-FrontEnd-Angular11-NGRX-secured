@@ -10,13 +10,13 @@ import {Store} from "@ngrx/store";
 import {Router} from "@angular/router";
 import {GetProfileAction} from "../ngrx/UsersProfileState/UsersProfile.action";
 import {GetSingleBookAction} from "../ngrx/singleBookState/SingleBook.action";
+import {host} from "../envirements/common.fields";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService implements OnInit {
-  host: string = 'http://localhost:8085/book';
   constructor(private http: HttpClient ,
               private store : Store ,private router : Router) {
   }
@@ -25,46 +25,46 @@ export class BookService implements OnInit {
   }
 
   public getAllBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.host + "?page=0&size=2");
+    return this.http.get<Book[]>(host.booksHost + "?page=0&size=2");
   }
 
   public getAllBooksPage(pageSize : PageSize): Observable<Book[]> {
-    return this.http.get<Book[]>(this.host + "?page=" + pageSize.page + "&size=" + pageSize.size);
+    return this.http.get<Book[]>(host.booksHost + "?page=" + pageSize.page + "&size=" + pageSize.size);
   }
 
   public getBookOwner(bookId: number): Observable<User> {
-    return this.http.get<User>(this.host + "/" + bookId + "/owner");
+    return this.http.get<User>(host.booksHost + "/" + bookId + "/owner");
   }
 
 
   public getBookImageUrl(bookId : number) : Observable<string>{
-    return this.http.get(this.host + "/"+bookId+"/image" , { responseType: 'text' })
+    return this.http.get(host.booksHost + "/"+bookId+"/image" , { responseType: 'text' })
   }
 
   public getPageInfo(size : number , keyword : string ="" ,searchType : SearchType = SearchType.ALL):Observable<PageInfo> {
     if(searchType == SearchType.KEYWORD)
-      return this.http.get<PageInfo>(this.host + "/" + "pageInfo/" +keyword+"?size=" + size);
+      return this.http.get<PageInfo>(host.booksHost + "/" + "pageInfo/" +keyword+"?size=" + size);
     if(searchType== SearchType.CATEGORY)
-      return this.http.get<PageInfo>(this.host + "/" + "pageInfo/category/" +keyword+"?size=" + size);
+      return this.http.get<PageInfo>(host.booksHost + "/" + "pageInfo/category/" +keyword+"?size=" + size);
 
-    return this.http.get<PageInfo>(this.host + "/" + "pageInfo?size=" + size);
+    return this.http.get<PageInfo>(host.booksHost + "/" + "pageInfo?size=" + size);
 
   }
 //{keyword , size }
   public searchBookKeyword(payload :ActionPayload<string>):Observable<Book[]>{
-    return this.http.get<Book[]>(this.host +  "/keyword/" + payload.data + "?size=" +payload.pageSize.size + "&page=" + payload.pageSize.page);
+    return this.http.get<Book[]>(host.booksHost +  "/keyword/" + payload.data + "?size=" +payload.pageSize.size + "&page=" + payload.pageSize.page);
   }
 
   public searchBookByCategory(payload :ActionPayload<string>):Observable<Book[]>{
-    return this.http.get<Book[]>(this.host +  "/category/" + payload.data + "?size=" +payload.pageSize.size + "&page=" + payload.pageSize.page);
+    return this.http.get<Book[]>(host.booksHost +  "/category/" + payload.data + "?size=" +payload.pageSize.size + "&page=" + payload.pageSize.page);
   }
   public getBooksOfUser(payload :ActionPayload<number>):Observable<Book[]>{
-    return this.http.get<Book[]>(this.host +  "/user/" + payload.data + "?size=" +payload.pageSize.size + "&page=" + payload.pageSize.page);
+    return this.http.get<Book[]>(host.booksHost+  "/user/" + payload.data + "?size=" +payload.pageSize.size + "&page=" + payload.pageSize.page);
   }
 
 
   public getPageInfoOfUserBooks(size : number, userId : string):Observable<PageInfo> {
-    return this.http.get<PageInfo>(this.host + "/" + "pageInfo/user/" +userId+"?size=" + size);
+    return this.http.get<PageInfo>(host.booksHost + "/" + "pageInfo/user/" +userId+"?size=" + size);
   }
 
 
@@ -86,7 +86,7 @@ export class BookService implements OnInit {
 
   public addBookToUser(userId : string  , book : CreatedBook ):Observable<Book>{
     book = {...book , bookCategory:book.bookCategory?.toUpperCase()}
-    return this.http.post<Book>(this.host +"/"+ userId  , book);
+    return this.http.post<Book>(host.booksHost +"/"+ userId  , book);
   }
 
   goToPost(book :Book) {
@@ -95,12 +95,12 @@ export class BookService implements OnInit {
   }
 
   public deleteBook(bookId :number):Observable<Book>{
-    return this.http.delete<Book>(this.host +"/"+bookId);
+    return this.http.delete<Book>(host.booksHost +"/"+bookId);
 
   }
   public editBook(book : Book):Observable<Book>{
     console.log(book)
-    return this.http.put<Book>(this.host , book);
+    return this.http.put<Book>(host.booksHost , book);
   }
 
 

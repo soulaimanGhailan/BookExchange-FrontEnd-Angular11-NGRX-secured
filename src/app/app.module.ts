@@ -42,6 +42,7 @@ import {MatInputModule} from "@angular/material/input";
 import { AddOtherBookComponent } from './components/profile/add-book/add-other-book/add-other-book.component';
 import { EditBookComponent } from './components/profile/edit-book/edit-book.component';
 import { UserInfoEditFromComponent } from './components/profile/profile-user-info/user-info-edit-from/user-info-edit-from.component';
+import { NotificationsComponent } from './components/page-head/nav-bar/notifications/notifications.component';
 
 export function initKeyClock(kcSecurity : KeycloakService) {
   return () =>
@@ -88,6 +89,7 @@ export function initKeyClock(kcSecurity : KeycloakService) {
     AddOtherBookComponent,
     EditBookComponent,
     UserInfoEditFromComponent,
+    NotificationsComponent,
 
 
 

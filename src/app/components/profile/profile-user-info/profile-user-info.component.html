@@ -3,7 +3,7 @@
     <div class="column member">
 
       <img style="cursor: pointer" (click)="modifyProfilePicInit()" src="{{'data:image/jpeg;base64,'+user.imageContentBase64}}" alt=""/>
-      <div *ngIf="profilePic" class="form-group">
+      <div *ngIf="profilePic && isOwnerProfile" class="form-group">
         <form [formGroup]="modifyImageGroup" *ngIf="modifyImageGroup" (ngSubmit)="modifyProfilePic()">
           <input formControlName="profilePicture" (change)="onFileSelected($event)" type="file" class="form-control-file"
                  [ngClass]="{'is-invalid' : submitted && modifyImageGroup.controls['profilePicture'].errors}">
@@ -38,18 +38,18 @@
       <p class="address">
         <ng-container *ngIf="userAddress">
           <a (click)="onCountry()" style="cursor: pointer" class="lining">Country: </a>{{userAddress.country}}<br> <br>
-          <app-user-info-edit-from *ngIf="country"  [updateFieldType]="updateUserFieldType.UpdateCOUNTRY" [initialValue]="userAddress.country"></app-user-info-edit-from>
+          <app-user-info-edit-from  *ngIf="country && isOwnerProfile"  [updateFieldType]="updateUserFieldType.UpdateCOUNTRY" [initialValue]="userAddress.country"></app-user-info-edit-from>
 
           <a style="cursor: pointer" (click)="onCity()" class="lining">City: </a>{{userAddress.city}}<br> <br>
-          <app-user-info-edit-from *ngIf="city" [updateFieldType]="updateUserFieldType.UpdateCITY" [initialValue]="userAddress.city"></app-user-info-edit-from>
+          <app-user-info-edit-from *ngIf="city && isOwnerProfile" [updateFieldType]="updateUserFieldType.UpdateCITY" [initialValue]="userAddress.city"></app-user-info-edit-from>
 
           <a style="cursor: pointer" class="lining" (click)="onHomeAddress()">HomeAddress: </a>{{userAddress.homeAddress}}<br> <br>
-          <app-user-info-edit-from *ngIf="homeAddress" [updateFieldType]="updateUserFieldType.UpdateHOMEADDRESS" [initialValue]="userAddress.homeAddress"></app-user-info-edit-from>
+          <app-user-info-edit-from *ngIf="homeAddress && isOwnerProfile" [updateFieldType]="updateUserFieldType.UpdateHOMEADDRESS" [initialValue]="userAddress.homeAddress"></app-user-info-edit-from>
 
         </ng-container>
 
         <a (click)="onPhoneNum()" style="cursor: pointer" class="lining" style="cursor: pointer">Phone number: </a><span>{{user.phoneNumber}}</span>
-        <app-user-info-edit-from  *ngIf="phoneNum" [updateFieldType]="updateUserFieldType.UpdatePhoneNum" [initialValue]="user.phoneNumber"></app-user-info-edit-from>
+        <app-user-info-edit-from  *ngIf="phoneNum && isOwnerProfile" [updateFieldType]="updateUserFieldType.UpdatePhoneNum" [initialValue]="user.phoneNumber"></app-user-info-edit-from>
 
       </p>
       <br>
@@ -60,7 +60,7 @@
         <a class="lining">Facebook:</a> <a href="#"> FB Page</a><br> <br>
       </p>
 
-      <ng-container *ngIf="user.userId == securityService.profile.id">
+      <ng-container *ngIf="isOwnerProfile">
         <a (click)="editProfile()" class="button" style="width: 150px">Edit profile</a> <br> <br>
         <a (click)="addBook()" class="button" style="width: 150px">Add Book</a>
       </ng-container>

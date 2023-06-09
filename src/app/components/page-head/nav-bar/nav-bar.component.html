@@ -15,19 +15,20 @@
 
         <ul id="nav" class="nav">
 
-          <li><a (click)="onHome()">Home</a></li>
-          <li><span><a style="cursor: pointer;" (click)="onBlog()">Blog</a></span>
+          <li><a style="cursor: pointer" (click)="onHome()">Home</a></li>
+          <li><a style="cursor: pointer;" (click)="onBlog()">Blog</a>
             <ul>
               <li><a style="cursor: pointer;">Blog Index</a></li>
               <li><a (click)="onSinglePost()" style="cursor: pointer;">Post</a></li>
             </ul>
           </li>
-          <li><span><a style="cursor: pointer;" (click)="onProfile()">Portfolio</a></span>
+          <li><a style="cursor: pointer;" (click)="onProfile()">Portfolio</a>
             <ul>
               <li  *ngIf="!securityService.profile"><a (click)="login()" style="cursor: pointer;">Login</a></li>
               <li  *ngIf="securityService.profile"><a (click)="logout()" style="cursor: pointer;">Log out</a></li>
             </ul>
           </li>
+          <app-notifications *ngIf="securityService.profile"></app-notifications>
           <li><a style="cursor: pointer;">About</a></li>
           <li><a style="cursor: pointer;">Contact</a></li>
           <li><a style ="cursor: pointer;">Features</a></li>

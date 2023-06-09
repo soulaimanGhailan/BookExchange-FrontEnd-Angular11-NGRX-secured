@@ -2,25 +2,24 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Address, User} from "../model/user.model";
 import {HttpClient} from "@angular/common/http";
-import {UpdateUserFieldType, UpdateUserPayload} from "../model/payload.model";
-import {SecurityService} from "../security/security.service";
+import {UpdateUserPayload} from "../model/payload.model";
+import {host} from "../envirements/common.fields";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-   host  : string = 'http://localhost:8085/user';
   constructor(private http : HttpClient ) { }
 
 
   public getUser(userId : string) : Observable<User>{
-    return this.http.get<User>(this.host + "/" +userId);
+    return this.http.get<User>(host.usersHost + "/" +userId);
   }
   public getUserAddress(userId : string) : Observable<Address>{
-    return this.http.get<Address>(this.host + "/" +userId + "/address");
+    return this.http.get<Address>(host.usersHost + "/" +userId + "/address");
   }
   public updateUserInfo(payload :UpdateUserPayload):Observable<User>{
-        return this.http.put<User>(this.host +"/updateUserField" , payload)
+        return this.http.put<User>(host.usersHost +"/updateUserField" , payload)
   }
 
 }

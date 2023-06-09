@@ -23,6 +23,7 @@ export class ProfileUserInfoComponent implements OnInit{
   profilePic:boolean = false;
   modifyImageGroup! : FormGroup;
   submitted: boolean = false;
+  isOwnerProfile!:boolean  ;
   public updateUserFieldType = UpdateUserFieldType ;
   constructor(private userService : UserService , public securityService : SecurityService ,
               private router : Router , private fb : FormBuilder ,
@@ -32,6 +33,7 @@ export class ProfileUserInfoComponent implements OnInit{
     this.userService.getUserAddress(this.user.userId).subscribe({
       next : data => this.userAddress = data
     })
+    this.isOwnerProfile = (this.user.userId == this.securityService.profile.id) ;
   }
 
   addBook() {

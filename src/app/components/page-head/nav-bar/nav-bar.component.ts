@@ -22,7 +22,6 @@ export class NavBarComponent implements OnInit{
 
   onProfile() {
     if(this.securityService.profile){
-      console.log("ok")
         if(this.securityService.profile.id){
         this.bookService.goToOwnerProfile(0 , this.securityService.profile.id)
         }
