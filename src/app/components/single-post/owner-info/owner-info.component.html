@@ -5,9 +5,9 @@
   </div>
   <div class="about">
     <h5><a (click)="goToOwner()" title="Posts by John Doe" style="cursor: pointer" class="lining"  rel="author">{{owner.firstname + " "+owner.lastname}}</a></h5>
-    <p>Jon Doe is lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate
-      cursus a sit amet mauris. Morbi accumsan ipsum velit. Duis sed odio sit amet nibh vulputate
-      <a href="#">cursus</a> a sit <a href="#">amet mauris</a>. Morbi elit consequat ipsum.</p>
+    <a class="lining">E-mail: </a> {{owner.email}}<br>
+    <a class="lining">Country: </a> {{userAddress.country}}<br>
+    <a class="lining">City: </a> {{userAddress.city}}<br>
   </div>
 
 </div>

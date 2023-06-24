@@ -1,19 +1,17 @@
 <!-- respond -->
 <div class="respond">
-
   <h3>Leave a Comment</h3>
-
-  <!-- form -->
-  <form name="contactForm" id="contactForm" method="post" action="">
+  <form [formGroup]="commentFromGroup" (ngSubmit)="comment()">
     <fieldset>
-
       <div class="message cf">
         <label  for="cMessage">Message <span class="required">*</span></label>
-        <textarea name="cMessage"  id="cMessage" rows="1" cols="50" ></textarea>
+        <textarea formControlName = "comment"  id="cMessage" rows="1" cols="50"
+                  [ngClass]="{'is-invalid' : submitted && commentFromGroup.controls['comment'].errors}"></textarea>
+        <div *ngIf="submitted && commentFromGroup.controls['comment'].errors" class="invalid-feedback">
+          <div *ngIf="commentFromGroup.controls['comment'].errors">comment text required</div>
+        </div>
       </div>
-
-      <button type="submit" class="submit">Submit</button>
-
+      <button>Submit</button>
     </fieldset>
   </form> <!-- Form End -->
 

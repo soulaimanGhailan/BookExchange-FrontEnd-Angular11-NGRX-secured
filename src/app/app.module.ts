@@ -43,6 +43,11 @@ import { AddOtherBookComponent } from './components/profile/add-book/add-other-b
 import { EditBookComponent } from './components/profile/edit-book/edit-book.component';
 import { UserInfoEditFromComponent } from './components/profile/profile-user-info/user-info-edit-from/user-info-edit-from.component';
 import { NotificationsComponent } from './components/page-head/nav-bar/notifications/notifications.component';
+import { OnlineChatComponent } from './components/online-chat/online-chat.component';
+import { ContactComponent } from './components/online-chat/contact/contact.component';
+import { SingleContactComponent } from './components/online-chat/contact/single-contact/single-contact.component';
+import { SendToUserComponent } from './components/online-chat/send-to-user/send-to-user.component';
+import { TopUsersComponent } from './components/home/top-users/top-users.component';
 
 export function initKeyClock(kcSecurity : KeycloakService) {
   return () =>
@@ -90,6 +95,11 @@ export function initKeyClock(kcSecurity : KeycloakService) {
     EditBookComponent,
     UserInfoEditFromComponent,
     NotificationsComponent,
+    OnlineChatComponent,
+    ContactComponent,
+    SingleContactComponent,
+    SendToUserComponent,
+    TopUsersComponent,
 
 
 

@@ -9,6 +9,7 @@ import {AuthGuard} from "./security/guards/security.guard";
 import {AddBookComponent} from "./components/profile/add-book/add-book.component";
 import {AddOtherBookComponent} from "./components/profile/add-book/add-other-book/add-other-book.component";
 import {EditBookComponent} from "./components/profile/edit-book/edit-book.component";
+import {OnlineChatComponent} from "./components/online-chat/online-chat.component";
 
 const routes: Routes = [
   {path : "blog" , component:BlogComponent  , canActivate:[AuthGuard]  , data : {roles : ['USER']} },
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path : "addBook" , component:AddBookComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}} ,
   {path : "otherBook" , component:AddOtherBookComponent, canActivate:[AuthGuard]  , data : {roles : ['USER']}},
   {path : "editBook" , component:EditBookComponent, canActivate:[AuthGuard]  , data : {roles : ['USER']}},
+  {path : "message" , component:OnlineChatComponent, canActivate:[AuthGuard]  , data : {roles : ['USER']}},
   {path : "home" , component:HomeComponent},
   {path : "" , component:HomeComponent},
 ];

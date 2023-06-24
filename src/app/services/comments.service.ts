@@ -50,4 +50,8 @@ export class CommentsService implements OnInit{
   hasReplies(commentId : number):Observable<boolean> {
     return this.http.get<boolean>(host.commentsHost  + "/"+commentId +"/hasReplies");
   }
+
+  comment(comment:string , userId : string , bookId : number):Observable<Comment>{
+    return this.http.post<Comment>(host.commentsHost   + "/" +userId +"/" +bookId , comment) ;
+  }
 }

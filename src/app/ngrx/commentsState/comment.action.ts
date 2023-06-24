@@ -22,6 +22,7 @@ export enum CommentsActionType {
 
 
 
+
 }
 export class INITCommentAction implements Action{
   type :CommentsActionType = CommentsActionType.INIT_COMMENTS_OfBook;
@@ -79,7 +80,6 @@ export class LessRepliesAction implements Action{
   constructor(public payload : number) {
   }
 }
-
 
 
 export type CommentAction =

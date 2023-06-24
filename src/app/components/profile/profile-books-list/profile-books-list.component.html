@@ -9,11 +9,11 @@
       <div class="link-icon">
         <ng-container *ngIf="book.owner.userId == securityService.profile.id">
           <div>
-            <i (click)="deleteBook($event)" class="fa fa-trash deleteAnimation"></i>
+            <i (click)="deleteBook($event)" class="bi bi-trash deleteAnimation"></i>
           </div>
           <br>
           <div>
-            <i (click)="editBook($event)" class="fa fa-edit editAnimation" style=" margin-left: 8px"></i>
+            <i (click)="editBook($event)" class="bi bi-pencil-square editAnimation" style=" margin-left: 8px"></i>
           </div>
         </ng-container>
       </div>

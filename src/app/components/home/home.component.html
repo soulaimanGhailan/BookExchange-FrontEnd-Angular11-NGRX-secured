@@ -1,1 +1,15 @@
-<p>home works!</p>
+<br> <br>
+<section id="works">
+
+  <div class="row">
+    <div class="twelve columns align-center">
+      <h1>Top 4 Users  </h1>
+    </div>
+    <div id="portfolio-wrapper" class="bgrid-quarters s-bgrid-halves">
+      <ng-container *ngFor="let i of [1,2,3,4]">
+        <app-top-users></app-top-users>
+      </ng-container>
+    </div>
+  </div>
+
+</section> <!-- Works Section End-->

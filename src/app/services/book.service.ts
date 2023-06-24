@@ -99,7 +99,6 @@ export class BookService implements OnInit {
 
   }
   public editBook(book : Book):Observable<Book>{
-    console.log(book)
     return this.http.put<Book>(host.booksHost , book);
   }
 
